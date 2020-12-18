@@ -9,46 +9,40 @@
 
 <h1 id="count">90</h1>
 
+<script>
 
-    <script>
+// amount of seconds to start//
+let count = 90
 
-        // ammount of seconds to start//
-        let count = 90
+// interval to decrement amount of time by one each second//
 
-        // interval to decrement amount of time by one each second//
+let myInterval = setInterval(() => {
+//   moves count down by 1//
+count--
+// display time left on the screen//
+document.getElementById('count').textContent = count
 
-  let myInterval = setInterval(() => {
-    //   moves count down by 1//
-        count--
-        // display time left on the screen//
-        document.getElementById('count').textContent = count
-
-    // if we are out of time...
-        if (count <= 0)
+// if we are out of time...
+    if (count <= 0)
             alert('Time is up!')
             clearInterval(myInterval)
         }, 1000)
 
 
-        
+// let myTimeout = setTimeout(() => {
+//     console.log('hi')
+// }, 5000)
 
-        // let myTimeout = setTimeout(() => {
-        //     console.log('hi')
-        // }, 5000)
-
-        // clearTimeout(myTimeout)
-
-      
+// clearTimeout(myTimeout)
 
 
-        // let randomNum = 12//
+// let randomNum = 12//
 
 // while (randomNum % 2 === 0) {
 //     console.log('randoNum')
 //     randomNum = Math.floor(Math.random() * 100)
 // } 
 
-    </script>
-    
+    </script>  
 </body>
 </html>
