@@ -12,6 +12,7 @@
 </head>
 ​
 <body>
+ <h1>The Todo Application!</h1>
   <form>
     <p>
       <label for="item">item</label>
@@ -24,124 +25,104 @@
 ​
   <ul id="items"></ul>
 ​
-​
-​
   <script>
-    // creates array called items. If there's something already in localStorage for it, stores each item from input onto localStorage OR when the array is empty it creates the array in localStorage then uses it to store inputs in.
-    // if array is empty, it's null value. null is a bulleon value where null = false. Q is describing it like it's a kinda fake-ish false using the term "falsey".
-    // so add || [] after telling it to add to the array so it will also work when there's a null array.
+   
+    // GIVEN [] as a second option
+    // THEN also accept null values
     let items = JSON.parse(localStorage.getItem('items')) || []
 
-    // IF the items array is empty, it skips this loop because i will be 0, so it can't be less than an items.length of 0.//
-    // so IF someone had alredy been there and there's items already in the array on localStorage, this starts loop that puts what was already in the array on the screen
+    // Logic for creating a "ToDo Item"
     for (let i=0; i<items.length; i++) {
 
-      // for each i, this creates a li (it creates it as an empty li, we fill the li in the next steps)
+      // THEN create a separate li Tag for each Item
       let itemElem = document.createElement('li')
       
-      // so the li we just created (itemElem), give it the custom property (aka: assigning a dataset) that matches what's found in the array at items[i].text ==> which calls on the object list in the array we're referencing from that was already in localStorage, finds the item at i position and gives us its text value from the text key
-      // setting data attribute of item. So dataset.anything gives it a dataset of anything.
-      //a data-anything is a custom property. In this case, we're using it to avoid the fact that the system would otherwise read the text with an x at the end b/c of the button, so we don't want that to get in the way of everything else we're doing. This allows us to get the actual item w/o getting mucked up by the x button.
-      // Question I want to ask at office hours on Monday (if no one answers it before then): If we were putting a dataset into our actual HTML (instead of putting one there via JS), what would that look like? I can't picture the actual syntax in the HTML.
+      // GIVEN item set it equal to items index.text
       itemElem.dataset.item = items[i].text
 
-      // this checks if the array on localStorage was left as marked done or not done last time the user was on the app
+      // Checks item in localStorage was marked as done or not done 
       if(items[i].isDone) {
         itemElem.className = 'todo green'
       } else {
         itemElem.className = 'todo'
       }
 
-      // so it's pulling the item object from the array on localStorage and telling it what to put back on the page in the itemElem li that was just created
+      // Display the users Items
       itemElem.innerHTML =`
         ${items[i].text}
         <button class="delete">x</button
         `
-      // take that itemElem li that we just created and actually adding it to the ul in the body. The append part means that it's added as the last thing between the ul tags.
+      // GIVEN a new item
+      // THEN it will be append to the end
       document.getElementById('items').append(itemElem)
     }
-    // So at this point, the above loop has put us back to where the user last left things off from a previous visit
 
-    // this is where a user begins if the items array was null, this is also where return users can begin to continue to modify their list
-    // Advice from Q: typically best to put any event listeners below the other stuff you're coding for in your JS
-
-    // get thing with id = 'addItem' (which is the button after our input), then listen for 'click'. So basically when you click the add item button. Do the following...
+    //  Event Listen for 'addItem' 
     document.getElementById('addItem').addEventListener('click', event => {
-
-      // In any form, if you click a button, it has a number of default things it tries to do. We're disabling that b/c we don't want any of what it does. My impression from how Q talked about this was that he seemed to be saying that this is ALWAYS something you want to do (kinda like how we always want to have a reset file linked for our css).
       event.preventDefault()
 
-      // WE STOPPED HERE when going through this in office hours after class Friday
-
-      // every time someone clicks 'addItem', add itemObj
+      // User Clicks 'addItem' it will add item to itemObj
       let itemObj = {
-        // the value of what was entered into the input with id="item" is stored under the text key
+
         text: document.getElementById('item').value,
-        // this isDone key will let us mark each item as done or not. Use a bulleon value. Since the item is just now being added to itemObj, it is not yet done. Which is why we're setting it to false.
+        // "isDone" key will let us mark each item as done or not. 
+        // THEN use a bool value. Since item is just added to itemObj, it is not yet done. Which is why we set "isDone" to false.
         isDone: false
       }
       
-      // take the info we just generated for itemObj and (aka:push) it to array items
+      // GIVEN a new Item
+      // THEN "add" it to "itemObj" 
       items.push(itemObj)
 
-      // then let's put that same items array (with its new object that we just pushed to it in the previous line of code) in localStorage and placing the array items into localStorage. localStorage only accepts strings and numbers. We use JSON.stringify(items) to make the items array into a string that still retains the structure of the array.
-      //  JSON.stringify makes sure that the items array keeps its array style. Otherwise localStorage tries to turn it into a single non-array string.
+      // GIVEN localStorage.set 'item'
+      // THEN it will create an array structure
       localStorage.setItem('items', JSON.stringify(items))
 
-      // so sofar we have made the new object and stored it in localStorage. Now go to localStorage but nothing is added to the page yet.
-      // so now, let's get the items from localStorage, and put them on the page.
-
-      //create a new <li> we're gonna give it the variable itemElem
+      //Creates a new List Item
       let itemElem = document.createElement('li')
       
-      // set dataset of itemElem to the value that was put in the input with id="item"
+      // GIVEN dataset of itemElem 
+      // THEN take that value from the input id="item"
+      // SET value of that input to 'item'
       itemElem.dataset.item = document.getElementById('item').value
 
-      // give itemElem a class name "todo"
+      // .notation '.className' = "todo"
       itemElem.className = 'todo'
       
-      // set html of the li itemElem: grab the text value from input w/ id="item" & follow it up with a button with class="delete" and button text x
+      // Setting HTML to show ITEM
+      // THEN delete btn
       itemElem.innerHTML = `
         ${document.getElementById('item').value}<button class="delete">x</button>
         `
         
-      // put new li 'itemElem' as the last thing in the element with id="items" (which is the ul we have up in the HTML). So we're adding the li we've just defined to the ul that we have in our html.
+      // Appending 'item' to list
       document.getElementById('items').append(itemElem)
       
-      // clear the input field of the input with id="item"
+      // THEN clear out input field 
       document.getElementById('item').value = ''
     })
-
-    // so at this point, we've told it that each new item put into the input gets set as a li then put into the ul. Each li has the following: dataset that matches the value of the input, has class name 'todo', and the html content within the li tag puts the value of the input as text and a button with class="delete" that shows an x on the button
-
-    //everything that happens on the doc gets this event listener that we code right after this section of comments. We use this method of a global listener to handle dynamic elements that weren't in original HTML we have typed above. This allows us to direct it how to act when we click on things that were only added to the HTML via our JS.
-    // this listens for ANY click ANYWHERE on the screen.
+  
+    // Page Event Listener
     document.addEventListener('click', event => {
-      
 
-      // event.target tells you the thing the event happened to. The event we're looking for is clicks. So event.target will tell us what thing was clicked
-      // so this if statement is saying for ANY click, look at the event target, if the list of classes of the targeted/clicked element contains 'todo', then do ___ .
-      // keep in mind, the elements that we have marked with the 'todo' class are the <li> elements. So basically this means we're saying "IF you click on a li, then do ____."
+      // GIVEN a click 
+      // THEN event.target will "listen"
+      // GIVEN click has .classList.contains 'todo'
+      // THEN do "if" condition statement
       if (event.target.classList.contains('todo')) {
-        // in the console.log display the dataset we assigned the li when the item was created --- as far as I know, this was just left here as a check that when we set the dataset, it was set correctly. I'm 99% sure you can delete this and it won't break the code.
-        console.log(event.target.dataset.item)
+        // console.log(event.target.dataset.item)
         
-
-        // loop through the items array looking for the object whose text matches the dataset of the event.target (aka: the dataset of the item that was clicked on, which remember, above we told it to basically take what was typed into the input and set it as the dataset of the li. The dataset of something is just a property that you can call upon for things such as this.)
         for (let i = 0; i < items.length; i++) {
-          // look for the object in the items array whose text matches the dataset of the target that was clicked on
+
+          // GIVEN item with text
+          // THEN should match event.target data
           if (items[i].text === event.target.dataset.item) {
-            // When you find that object, change the isDone status.
-            // recall that when we added the input text to the items array, we set isDone to be a bulleon (true/false). We set it to initially start off as false since when you add something to a todo list, it won't be done. So the first time we click on a li, it'll change it from the false value we had it start with to true (aka: marking it as done).
-            // it takes isDone = true and makes it isDone = !true. !true means not true, which would of course be false.
+          // GIVEN a match
+          // THEN remove item from list
             items[i].isDone = !items[i].isDone
           }
         }
 
-        // so at this point, we have any list item the user has typed in stored to the items list in the localStorage, displayed that item as a li on the screen. We've also made it so that if you click any li, it finds it where it's stored on the localStorage and changes the recorded value of of the isDone for that object.
-
-        // I have no idea what this does. I know the JSON.stringify(items) has to do with making sure that when we set the item that's a part of the items array to localStorage that the items array maintains its array structure. But IDK why that's important to do here or what exactly that accomplishes in the big picture of what's going on at this point in the code.
-        // Devin's comments indicate that all this does is updating the localStorage to reflect the change that we just made to the isDone status.
         localStorage.setItem('items', JSON.stringify(items))
         
 
@@ -178,8 +159,7 @@
             items.splice(i, 1)
           }
         }
-        
-        // yeah, IDK what this does.       
+       
         // Devin's comments indicate that this basically updates/refreshes what's stored in the localStorage
         localStorage.setItem('items', JSON.stringify(items))
         
