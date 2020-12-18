@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .green {
+            font-style: oblique;
+        }
+    </style>
+    
+</head>
+<body>
+    <form>
+        <p>
+          <label for="item">item</label>
+          <input type="text" name="item" id="item">
+        </p>
+        <p>
+          <button id="addMovie">Add to movie list</button>
+        </p>
+      </form>
+      <ul id="items"></ul>
+
+      <script>
+
+          document.getElementById(`addMovie`).addEventListener(`click`, event => {
+              event.preventDefault()
+              let itemElem = document.createElement(`li`)
+              itemElem.className = `Movie`
+            //   itemElem.innerHTML = `
+            //   ${document.getElementById('item')}
+            //   `
+          document.getElementById(`items`).append(itemElem)
+          document.getElementById('item').value = ''
+          })
+
+          document.addEventListener(`click`, )
+
+          
+
+
+      </script>
+</body>
+</html>
