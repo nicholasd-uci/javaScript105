@@ -6,7 +6,15 @@ h1 {
   color: white;
 }
 
+p {
+  color: #ddd8d8;
+}
+
 .green {
   color: green;
+}
+
+ul {
+  color: #ddd8d8;
 }
 /*# sourceMappingURL=main.css.map */
