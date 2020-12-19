@@ -1,0 +1,24 @@
+{
+  "name": "javaScript105",
+  "version": "1.0.0",
+  "description": "Dynamic Elements, Retrieving Values, Timed Events, and a JS Review",
+  "main": "index.js",
+  "dependencies": {
+    "node-sass": "^5.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicholasd-uci/javaScript105.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicholasd-uci/javaScript105/issues"
+  },
+  "homepage": "https://github.com/nicholasd-uci/javaScript105#readme"
+}
