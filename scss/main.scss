@@ -1,18 +1,35 @@
 $bg-color: rgb(0, 0, 0);
 $header: rgb(255, 255, 255);
-$form: rgb(221, 216, 216);
+$align: 20em;
+$text: rgb(221, 216, 216);
 
-
-body{
+body{ 
     background-color: $bg-color;
+}
+
+#nav{
+    
 }
 
 h1{
     color: $header;
+    text-decoration: underline;
+    padding-left: $align;
+    padding-top: 30px;
 }
 
-p{
-    color: $form;
+#box{
+    color: $text;
+    padding-left: 35em;
+}
+
+#button{
+    padding-top: 15px;
+    padding-left: 60em;
+}
+
+.label{
+    padding-left: $align;
 }
 
 .green{
@@ -20,6 +37,7 @@ p{
 }
 
 ul{
-    color: $form;
+    color: $text;
+    padding-left: 60em; 
 }
 

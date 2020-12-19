@@ -4,10 +4,23 @@ body {
 
 h1 {
   color: white;
+  text-decoration: underline;
+  padding-left: 20em;
+  padding-top: 30px;
 }
 
-p {
+#box {
   color: #ddd8d8;
+  padding-left: 35em;
+}
+
+#button {
+  padding-top: 15px;
+  padding-left: 60em;
+}
+
+.label {
+  padding-left: 20em;
 }
 
 .green {
@@ -16,5 +29,6 @@ p {
 
 ul {
   color: #ddd8d8;
+  padding-left: 60em;
 }
 /*# sourceMappingURL=main.css.map */
